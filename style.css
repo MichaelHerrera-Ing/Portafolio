@@ -1,4 +1,166 @@
-/* Continuación del styles.css */
+/* styles.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+nav .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+#hero {
+    background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center center/cover;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#hero .hero-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#hero h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+#hero p {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+#hero .btn {
+    background: #f60;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+#hero .btn:hover {
+    background: #e55;
+}
+
+section {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+section p {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.skills {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.skill {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+    margin: 10px;
+    transition: transform 0.3s ease;
+}
+
+.skill:hover {
+    transform: scale(1.05);
+}
+
+.skill i {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.skill h3 {
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+
+.skill p {
+    font-size: 1em;
+    color: #777;
+}
+
 .timeline {
     list-style: none;
     padding: 0;
@@ -10,58 +172,79 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin: 20px 0;
     position: relative;
+    animation: slideIn 1s ease-in-out;
 }
 
-.timeline li:before {
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.timeline li::before {
     content: '';
     position: absolute;
+    left: -10px;
     top: 20px;
-    left: -30px;
     width: 10px;
     height: 10px;
     background: #f60;
     border-radius: 50%;
 }
 
-#contacto {
-    background: #333;
-    color: #fff;
+.timeline li h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
 }
 
-#contact-form {
+.timeline li p {
+    margin: 10px 0 0;
+    color: #777;
+}
+
+form {
     display: flex;
     flex-direction: column;
     max-width: 600px;
     margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#contact-form label {
+form label {
     margin: 10px 0 5px;
-}
-
-#contact-form input,
-#contact-form textarea {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 20px;
     font-size: 1em;
 }
 
-#contact-form .btn {
-    background: #f60;
-    color: #fff;
+form input,
+form textarea {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+form button {
     padding: 10px 20px;
-    text-decoration: none;
+    font-size: 1em;
+    color: #fff;
+    background: #f60;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
-#contact-form .btn:hover {
+form button:hover {
     background: #e55;
 }
 
@@ -83,17 +266,21 @@
     text-decoration: underline;
 }
 
+#gameCanvas {
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #333;
+    background: #fff;
+}
+
 footer {
     background: #333;
     color: #fff;
     text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    padding: 20px;
+    margin-top: 20px;
 }
 
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+footer p {
+    margin: 0;
 }

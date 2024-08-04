@@ -1,40 +1,54 @@
 // script.js
 
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("contact-form");
+document.addEventListener('DOMContentLoaded', () => {
+    // Interactive Elements
+    const nav = document.querySelector('nav');
+    const hero = document.querySelector('#hero');
+    const gameCanvas = document.getElementById('gameCanvas');
+    const ctx = gameCanvas.getContext('2d');
 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
-
-        if (name === "" || email === "" || message === "") {
-            alert("Por favor, completa todos los campos.");
-            return;
+    // Sticky Navigation
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > hero.offsetHeight - nav.offsetHeight) {
+            nav.classList.add('sticky');
+        } else {
+            nav.classList.remove('sticky');
         }
-
-        const request = new XMLHttpRequest();
-        request.open("POST", "send_email.php", true);
-        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        request.onreadystatechange = function() {
-            if (request.readyState === 4 && request.status === 200) {
-                alert("Mensaje enviado exitosamente.");
-                form.reset();
-            } else if (request.readyState === 4) {
-                alert("Ocurrió un error al enviar el mensaje. Intenta nuevamente.");
-            }
-        };
-        request.send(`name=${name}&email=${email}&message=${message}`);
     });
-});
 
-document.addEventListener("scroll", function() {
-    const header = document.querySelector("header");
-    if (window.scrollY > 50) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
+    // Game Logic
+    let playerX = gameCanvas.width / 2;
+    let playerY = gameCanvas.height - 30;
+    const playerWidth = 50;
+    const playerHeight = 50;
+    const playerSpeed = 5;
+
+    function drawPlayer() {
+        ctx.fillStyle = '#f60';
+        ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
     }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+    }
+
+    function gameLoop() {
+        clearCanvas();
+        drawPlayer();
+        requestAnimationFrame(gameLoop);
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft' && playerX > 0) {
+            playerX -= playerSpeed;
+        } else if (event.key === 'ArrowRight' && playerX < gameCanvas.width - playerWidth) {
+            playerX += playerSpeed;
+        } else if (event.key === 'ArrowUp' && playerY > 0) {
+            playerY -= playerSpeed;
+        } else if (event.key === 'ArrowDown' && playerY < gameCanvas.height - playerHeight) {
+            playerY += playerSpeed;
+        }
+    });
+
+    gameLoop();
 });
